@@ -1,0 +1,30 @@
+{
+  "inputs": [
+    { "type": "promptString", "id": "github-token", "description": "GitHub Personal Access Token", "password": true }
+  ],
+  "servers": {
+    // ── COMMON WORK SERVERS ──────────────────────────────────────
+    // Uncomment and configure as needed
+
+    // "github": {
+    //   "command": "npx",
+    //   "args": ["-y", "@github/mcp-server"],
+    //   "env": { "GITHUB_TOKEN": "${input:github-token}" }
+    // },
+
+    // "context7": {
+    //   "type": "http",
+    //   "url": "https://mcp.context7.com/mcp"
+    // },
+
+    // "playwright": {
+    //   "command": "npx",
+    //   "args": ["-y", "@playwright/mcp"]
+    // },
+
+    // "memory": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-memory"]
+    // }
+  }
+}

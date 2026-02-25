@@ -1,0 +1,11 @@
+# ── Agent Config (append to your .gitignore) ─────────────────────
+
+# Claude local settings (personal, not shared)
+.claude/settings.local.json
+.claude/MEMORY.MD
+
+# Claude runtime
+.claude/worktrees/
+.claude/todos/
+.claude/debug/
+.claude/plans/
