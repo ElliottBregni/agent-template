@@ -1,0 +1,16 @@
+{
+  "server": "custom",
+  "description": "Self-hosted MCP endpoints for internal tools",
+  "endpoints": [
+    {
+      "name": "internal-api",
+      "url": "https://mcp.internal.example.com/sse",
+      "auth": "${{ secrets.INTERNAL_MCP_TOKEN }}",
+      "tools": ["query_database", "get_user", "list_services"],
+      "rate_limit": {
+        "requests_per_minute": 30
+      }
+    }
+  ],
+  "notes": "Add your self-hosted MCP endpoints here. Each endpoint needs a name, url, auth, and optional tool whitelist."
+}

@@ -1,0 +1,17 @@
+{
+  "server": "github",
+  "scopes": ["repo", "read:org", "read:discussion"],
+  "tool_overrides": {
+    "create_pull_request_review": {
+      "require_approval": true,
+      "max_comments": 20
+    },
+    "search_code": {
+      "max_results": 50
+    }
+  },
+  "filters": {
+    "repositories": [],
+    "file_patterns": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.py", "**/*.go"]
+  }
+}

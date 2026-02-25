@@ -1,0 +1,27 @@
+# Copilot CLI Agent Configuration
+# Declarative entrypoint for Copilot CLI agent behavior.
+# Skills, MCP servers, and prompts referenced from subdirectories.
+
+model: claude-sonnet-4-5-20250929
+
+instructions: ./instructions.md
+
+skills:
+  - ./skills/code-review.md
+  - ./skills/issue-triage.md
+  - ./skills/release-notes.md
+  - ./skills/test-generation.md
+  - ./skills/docs-update.md
+
+mcp_servers: ./mcp/servers.json
+
+prompts:
+  - ./prompts/pr-description.md
+  - ./prompts/commit-message.md
+  - ./prompts/summary.md
+
+# Copilot CLI specific
+agents:
+  - ./agents/code-review.md
+  - ./agents/test-writer.md
+  - ./agents/doc-writer.md

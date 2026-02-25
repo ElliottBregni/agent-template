@@ -1,0 +1,19 @@
+{
+  "server": "linear",
+  "team_id": "",
+  "project_id": "",
+  "tool_overrides": {
+    "create_issue": {
+      "default_labels": [],
+      "default_priority": 2,
+      "require_estimate": false
+    },
+    "update_issue": {
+      "allowed_transitions": ["backlog→todo", "todo→in_progress", "in_progress→done"]
+    }
+  },
+  "sync": {
+    "github_issues": true,
+    "auto_close_on_merge": true
+  }
+}

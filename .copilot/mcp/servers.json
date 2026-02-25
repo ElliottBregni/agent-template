@@ -1,0 +1,62 @@
+{
+  "servers": [
+    {
+      "name": "github",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@github/mcp-server"],
+      "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" },
+      "description": "GitHub repo operations, PRs, issues, code search"
+    },
+    {
+      "name": "linear",
+      "type": "http",
+      "url": "https://mcp.linear.app",
+      "description": "Issue tracking and project management"
+    },
+    {
+      "name": "slack",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zencoderai/slack-mcp-server"],
+      "env": { "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}" },
+      "description": "Channel messaging and notifications"
+    },
+    {
+      "name": "sentry",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sentry"],
+      "env": { "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}" },
+      "description": "Error tracking and exception investigation"
+    },
+    {
+      "name": "notion",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": { "NOTION_API_KEY": "${NOTION_API_KEY}" },
+      "description": "Documentation and knowledge base"
+    },
+    {
+      "name": "vercel",
+      "type": "http",
+      "url": "https://vercel.com/api/mcp",
+      "description": "Deployment status and preview environments"
+    },
+    {
+      "name": "supabase",
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp",
+      "description": "Database and auth management"
+    },
+    {
+      "name": "posthog",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@posthog/mcp"],
+      "env": { "POSTHOG_API_KEY": "${POSTHOG_API_KEY}" },
+      "description": "Product analytics and feature flags"
+    }
+  ]
+}

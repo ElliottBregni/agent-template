@@ -1,0 +1,21 @@
+# Agent Configuration
+# Single entrypoint — references skills, MCP servers, and prompts.
+# Keeps orchestration declarative and version-controlled.
+
+model: claude-sonnet-4-5-20250929
+
+instructions: ./instructions.md
+
+skills:
+  - ./skills/code-review.md
+  - ./skills/issue-triage.md
+  - ./skills/release-notes.md
+  - ./skills/test-generation.md
+  - ./skills/docs-update.md
+
+mcp_servers: ./mcp/servers.json
+
+prompts:
+  - ./prompts/pr-description.md
+  - ./prompts/commit-message.md
+  - ./prompts/summary.md

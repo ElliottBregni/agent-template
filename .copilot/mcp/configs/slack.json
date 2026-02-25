@@ -1,0 +1,20 @@
+{
+  "server": "slack",
+  "channels": {
+    "notifications": "#dev-notifications",
+    "alerts": "#alerts",
+    "releases": "#releases"
+  },
+  "tool_overrides": {
+    "post_message": {
+      "require_approval": false,
+      "allowed_channels": ["#dev-notifications", "#alerts", "#releases"],
+      "max_message_length": 4000
+    }
+  },
+  "templates": {
+    "pr_merged": ":merged: *{{title}}* merged by {{author}} → `{{branch}}`",
+    "deploy_success": ":rocket: Deployed `{{version}}` to {{environment}}",
+    "error_spike": ":warning: Error spike detected in `{{service}}` — {{count}} events in {{window}}"
+  }
+}
