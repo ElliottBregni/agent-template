@@ -1,0 +1,214 @@
+{
+  "mcpServers": {
+
+    // ── VERSION CONTROL ─────────────────────────────────────────
+    // "github": {
+    //   "command": "npx",
+    //   "args": ["-y", "@github/mcp-server"],
+    //   "env": { "GITHUB_TOKEN": "ghp_xxxxxxxxxxxx" }
+    // },
+
+    // ── DEV TOOLS ───────────────────────────────────────────────
+    // "filesystem": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/you/projects"]
+    // },
+    // "memory": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-memory"]
+    // },
+    // "sequential-thinking": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-sequentialthinking"]
+    // },
+    // "playwright": {
+    //   "command": "npx",
+    //   "args": ["-y", "@playwright/mcp"]
+    // },
+    // "puppeteer": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    // },
+    // "docker": {
+    //   "command": "npx",
+    //   "args": ["-y", "@ckreiling/mcp-server-docker"]
+    // },
+    // "figma": {
+    //   "command": "npx",
+    //   "args": ["-y", "@figma/mcp-server"],
+    //   "env": { "FIGMA_ACCESS_TOKEN": "fig_xxxxxxxxxxxx" }
+    // },
+
+    // ── REMOTE SERVERS (via mcp-remote proxy) ───────────────────
+    // Claude Desktop doesn't support remote servers natively.
+    // Use mcp-remote to proxy HTTP/SSE servers:
+    //
+    // "context7": {
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://mcp.context7.com/mcp"]
+    // },
+    // "supabase": {
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://mcp.supabase.com/mcp"]
+    // },
+    // "vercel": {
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://vercel.com/api/mcp"]
+    // },
+    // "linear": {
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://mcp.linear.app"]
+    // },
+    // "huggingface": {
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://huggingface.co/mcp"]
+    // },
+    // "render": {
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://mcp.render.com"]
+    // },
+    // "zapier": {
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://actions.zapier.com/mcp"]
+    // },
+
+    // ── DATABASE ────────────────────────────────────────────────
+    // "postgres": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-postgres"],
+    //   "env": { "POSTGRES_URL": "postgresql://user:pass@host:5432/db" }
+    // },
+    // "mysql": {
+    //   "command": "npx",
+    //   "args": ["-y", "@bytebase/dbhub", "--transport", "stdio"],
+    //   "env": { "DATABASE_URL": "mysql://user:pass@host:3306/db" }
+    // },
+    // "mongodb": {
+    //   "command": "npx",
+    //   "args": ["-y", "mongodb-mcp-server"],
+    //   "env": { "MONGODB_URI": "mongodb://localhost:27017/mydb" }
+    // },
+    // "redis": {
+    //   "command": "npx",
+    //   "args": ["-y", "@redis/mcp-server"],
+    //   "env": { "REDIS_URL": "redis://localhost:6379" }
+    // },
+    // "neon": {
+    //   "command": "npx",
+    //   "args": ["-y", "@neondatabase/mcp-server-neon"],
+    //   "env": { "NEON_API_KEY": "neon_xxxxxxxxxxxx" }
+    // },
+    // "prisma": {
+    //   "command": "npx",
+    //   "args": ["-y", "prisma-mcp-server"]
+    // },
+
+    // ── CLOUD & DEPLOY ──────────────────────────────────────────
+    // "cloudflare": {
+    //   "command": "npx",
+    //   "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
+    //   "env": { "CLOUDFLARE_API_TOKEN": "xxxxxxxxxxxx" }
+    // },
+    // "netlify": {
+    //   "command": "npx",
+    //   "args": ["-y", "@netlify/mcp-server"],
+    //   "env": { "NETLIFY_TOKEN": "xxxxxxxxxxxx" }
+    // },
+    // "aws": {
+    //   "command": "npx",
+    //   "args": ["-y", "@aws/mcp"],
+    //   "env": { "AWS_ACCESS_KEY_ID": "AKIA...", "AWS_SECRET_ACCESS_KEY": "xxxx" }
+    // },
+    // "heroku": {
+    //   "command": "npx",
+    //   "args": ["-y", "@heroku/mcp-server"],
+    //   "env": { "HEROKU_API_KEY": "xxxxxxxxxxxx" }
+    // },
+    // "terraform": {
+    //   "command": "npx",
+    //   "args": ["-y", "@hashicorp/terraform-mcp-server"]
+    // },
+
+    // ── SEARCH ──────────────────────────────────────────────────
+    // "brave-search": {
+    //   "command": "npx",
+    //   "args": ["-y", "@anthropic/brave-search-mcp"],
+    //   "env": { "BRAVE_API_KEY": "BSA..." }
+    // },
+    // "tavily": {
+    //   "command": "npx",
+    //   "args": ["-y", "@tavily/mcp-server"],
+    //   "env": { "TAVILY_API_KEY": "tvly-xxxxxxxxxxxx" }
+    // },
+    // "exa": {
+    //   "command": "npx",
+    //   "args": ["-y", "@exa-labs/exa-mcp-server"],
+    //   "env": { "EXA_API_KEY": "xxxxxxxxxxxx" }
+    // },
+    // "firecrawl": {
+    //   "command": "npx",
+    //   "args": ["-y", "@firecrawl/mcp-server"],
+    //   "env": { "FIRECRAWL_API_KEY": "xxxxxxxxxxxx" }
+    // },
+
+    // ── OBSERVABILITY ───────────────────────────────────────────
+    // "sentry": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-sentry"],
+    //   "env": { "SENTRY_AUTH_TOKEN": "sntrys_xxxxxxxxxxxx" }
+    // },
+    // "datadog": {
+    //   "command": "npx",
+    //   "args": ["-y", "@datadog/mcp-server"],
+    //   "env": { "DD_API_KEY": "xxxxxxxxxxxx" }
+    // },
+    // "grafana": {
+    //   "command": "npx",
+    //   "args": ["-y", "@grafana/mcp-grafana"],
+    //   "env": { "GRAFANA_TOKEN": "xxxxxxxxxxxx" }
+    // },
+
+    // ── SECURITY ────────────────────────────────────────────────
+    // "snyk": {
+    //   "command": "npx",
+    //   "args": ["-y", "@snyk/mcp-server"],
+    //   "env": { "SNYK_TOKEN": "xxxxxxxxxxxx" }
+    // },
+    // "gitguardian": {
+    //   "command": "npx",
+    //   "args": ["-y", "@gitguardian/gg-mcp"],
+    //   "env": { "GITGUARDIAN_API_KEY": "xxxxxxxxxxxx" }
+    // },
+
+    // ── COMMUNICATION ───────────────────────────────────────────
+    // "slack": {
+    //   "command": "npx",
+    //   "args": ["-y", "@zencoderai/slack-mcp-server"],
+    //   "env": { "SLACK_BOT_TOKEN": "xoxb-xxxxxxxxxxxx" }
+    // },
+    // "notion": {
+    //   "command": "npx",
+    //   "args": ["-y", "@notionhq/notion-mcp-server"],
+    //   "env": { "NOTION_API_KEY": "ntn_xxxxxxxxxxxx" }
+    // },
+
+    // ── PAYMENTS ────────────────────────────────────────────────
+    // "stripe": {
+    //   "command": "npx",
+    //   "args": ["-y", "@stripe/agent-toolkit"],
+    //   "env": { "STRIPE_SECRET_KEY": "sk_xxxxxxxxxxxx" }
+    // },
+
+    // ── AI ──────────────────────────────────────────────────────
+    // "openai": {
+    //   "command": "npx",
+    //   "args": ["-y", "@openai/mcp-server"],
+    //   "env": { "OPENAI_API_KEY": "sk-xxxxxxxxxxxx" }
+    // },
+    // "elevenlabs": {
+    //   "command": "npx",
+    //   "args": ["-y", "elevenlabs-mcp-server"],
+    //   "env": { "ELEVENLABS_API_KEY": "xxxxxxxxxxxx" }
+    // }
+  }
+}

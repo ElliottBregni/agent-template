@@ -23,7 +23,12 @@ Drop-in agent configuration for Claude Code and GitHub Copilot.
 │   ├── prompts/                 # Copilot slash commands
 │   └── instructions/            # Path-specific Copilot rules
 ├── .vscode/
-│   └── mcp.json                 # Copilot MCP servers
+│   └── mcp.json                 # VS Code Copilot MCP servers
+├── .copilot/
+│   └── mcp-config.json          # Copilot CLI MCP servers
+├── .junie/
+│   └── mcp/mcp.json             # JetBrains (Junie) MCP servers
+├── claude_desktop_config.json   # Claude Desktop / Opus 4.5 MCP servers
 └── .gitignore.agent-additions   # Append to your .gitignore
 ```
 
@@ -36,5 +41,10 @@ Drop-in agent configuration for Claude Code and GitHub Copilot.
    - `CLAUDE.md`
    - `.github/copilot-instructions.md`
 4. Append `.gitignore.agent-additions` to your `.gitignore`
-5. Uncomment MCP servers you need in `.mcp.json` and `.vscode/mcp.json`
+5. Uncomment MCP servers you need in the relevant config:
+   - `.mcp.json` — Claude Code
+   - `.vscode/mcp.json` — VS Code Copilot
+   - `.copilot/mcp-config.json` — Copilot CLI (`cp` to `~/.copilot/mcp-config.json`)
+   - `.junie/mcp/mcp.json` — JetBrains IDEs (IntelliJ, WebStorm, etc.)
+   - `claude_desktop_config.json` — Claude Desktop app (`cp` to `~/Library/Application Support/Claude/claude_desktop_config.json`)
 6. Run `chmod +x .claude/hooks/*.sh`
