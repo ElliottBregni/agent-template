@@ -1,30 +1,305 @@
 {
   "inputs": [
-    { "type": "promptString", "id": "github-token", "description": "GitHub Personal Access Token", "password": true }
+    { "type": "promptString", "id": "github-token", "description": "GitHub Personal Access Token", "password": true },
+    { "type": "promptString", "id": "database-url", "description": "Database connection string", "password": true },
+    { "type": "promptString", "id": "sentry-token", "description": "Sentry Auth Token", "password": true },
+    { "type": "promptString", "id": "stripe-key", "description": "Stripe Secret Key", "password": true },
+    { "type": "promptString", "id": "openai-key", "description": "OpenAI API Key", "password": true },
+    { "type": "promptString", "id": "figma-token", "description": "Figma Access Token", "password": true },
+    { "type": "promptString", "id": "slack-token", "description": "Slack Bot Token", "password": true },
+    { "type": "promptString", "id": "notion-key", "description": "Notion API Key", "password": true },
+    { "type": "promptString", "id": "brave-key", "description": "Brave Search API Key", "password": true },
+    { "type": "promptString", "id": "cloudflare-token", "description": "Cloudflare API Token", "password": true },
+    { "type": "promptString", "id": "netlify-token", "description": "Netlify Token", "password": true },
+    { "type": "promptString", "id": "snyk-token", "description": "Snyk Token", "password": true },
+    { "type": "promptString", "id": "datadog-key", "description": "Datadog API Key", "password": true },
+    { "type": "promptString", "id": "posthog-key", "description": "PostHog API Key", "password": true },
+    { "type": "promptString", "id": "auth0-token", "description": "Auth0 Management API Token", "password": true },
+    { "type": "promptString", "id": "contentful-token", "description": "Contentful Token", "password": true },
+    { "type": "promptString", "id": "redis-url", "description": "Redis connection URL", "password": true },
+    { "type": "promptString", "id": "mongodb-uri", "description": "MongoDB connection URI", "password": true }
   ],
   "servers": {
-    // ── COMMON WORK SERVERS ──────────────────────────────────────
-    // Uncomment and configure as needed
 
+    // ── VERSION CONTROL ─────────────────────────────────────────
     // "github": {
     //   "command": "npx",
     //   "args": ["-y", "@github/mcp-server"],
     //   "env": { "GITHUB_TOKEN": "${input:github-token}" }
     // },
-
-    // "context7": {
+    // "gitlab": {
     //   "type": "http",
-    //   "url": "https://mcp.context7.com/mcp"
+    //   "url": "https://gitlab.com/api/mcp"
+    // },
+    // "linear": {
+    //   "type": "http",
+    //   "url": "https://mcp.linear.app"
+    // },
+    // "jira": {
+    //   "type": "http",
+    //   "url": "https://mcp.atlassian.com"
     // },
 
+    // ── DEV TOOLS ───────────────────────────────────────────────
+    // "filesystem": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    // },
+    // "memory": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-memory"]
+    // },
+    // "sequential-thinking": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-sequentialthinking"]
+    // },
     // "playwright": {
     //   "command": "npx",
     //   "args": ["-y", "@playwright/mcp"]
     // },
-
-    // "memory": {
+    // "puppeteer": {
     //   "command": "npx",
-    //   "args": ["-y", "@modelcontextprotocol/server-memory"]
+    //   "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    // },
+    // "docker": {
+    //   "command": "npx",
+    //   "args": ["-y", "@ckreiling/mcp-server-docker"]
+    // },
+    // "storybook": {
+    //   "command": "npx",
+    //   "args": ["-y", "@storybook/addon-mcp"]
+    // },
+    // "figma": {
+    //   "command": "npx",
+    //   "args": ["-y", "@figma/mcp-server"],
+    //   "env": { "FIGMA_ACCESS_TOKEN": "${input:figma-token}" }
+    // },
+    // "postman": {
+    //   "command": "npx",
+    //   "args": ["-y", "@postman/mcp-server"],
+    //   "env": { "POSTMAN_API_KEY": "${input:postman-key}" }
+    // },
+    // "chrome-devtools": {
+    //   "command": "npx",
+    //   "args": ["-y", "@chrome-devtools/mcp"]
+    // },
+
+    // ── DOCS & CONTEXT ──────────────────────────────────────────
+    // "context7": {
+    //   "type": "http",
+    //   "url": "https://mcp.context7.com/mcp"
+    // },
+    // "microsoft-learn": {
+    //   "command": "npx",
+    //   "args": ["-y", "@microsoftdocs/mcp"]
+    // },
+
+    // ── DATABASE ────────────────────────────────────────────────
+    // "postgres": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-postgres"],
+    //   "env": { "POSTGRES_URL": "${input:database-url}" }
+    // },
+    // "mysql": {
+    //   "command": "npx",
+    //   "args": ["-y", "@bytebase/dbhub", "--transport", "stdio"],
+    //   "env": { "DATABASE_URL": "${input:database-url}" }
+    // },
+    // "mongodb": {
+    //   "command": "npx",
+    //   "args": ["-y", "mongodb-mcp-server"],
+    //   "env": { "MONGODB_URI": "${input:mongodb-uri}" }
+    // },
+    // "redis": {
+    //   "command": "npx",
+    //   "args": ["-y", "@redis/mcp-server"],
+    //   "env": { "REDIS_URL": "${input:redis-url}" }
+    // },
+    // "supabase": {
+    //   "type": "http",
+    //   "url": "https://mcp.supabase.com/mcp"
+    // },
+    // "neon": {
+    //   "command": "npx",
+    //   "args": ["-y", "@neondatabase/mcp-server-neon"],
+    //   "env": { "NEON_API_KEY": "${input:neon-key}" }
+    // },
+    // "prisma": {
+    //   "command": "npx",
+    //   "args": ["-y", "prisma-mcp-server"]
+    // },
+
+    // ── CLOUD & DEPLOY ──────────────────────────────────────────
+    // "vercel": {
+    //   "type": "http",
+    //   "url": "https://vercel.com/api/mcp"
+    // },
+    // "netlify": {
+    //   "command": "npx",
+    //   "args": ["-y", "@netlify/mcp-server"],
+    //   "env": { "NETLIFY_TOKEN": "${input:netlify-token}" }
+    // },
+    // "cloudflare": {
+    //   "command": "npx",
+    //   "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
+    //   "env": { "CLOUDFLARE_API_TOKEN": "${input:cloudflare-token}" }
+    // },
+    // "firebase": {
+    //   "command": "npx",
+    //   "args": ["-y", "@firebase/mcp-server"]
+    // },
+    // "heroku": {
+    //   "command": "npx",
+    //   "args": ["-y", "@heroku/mcp-server"]
+    // },
+    // "render": {
+    //   "type": "http",
+    //   "url": "https://mcp.render.com"
+    // },
+    // "railway": {
+    //   "command": "npx",
+    //   "args": ["-y", "@railway/mcp-server"]
+    // },
+    // "terraform": {
+    //   "command": "npx",
+    //   "args": ["-y", "@hashicorp/terraform-mcp-server"]
+    // },
+
+    // ── SEARCH & WEB ────────────────────────────────────────────
+    // "brave-search": {
+    //   "command": "npx",
+    //   "args": ["-y", "@anthropic/brave-search-mcp"],
+    //   "env": { "BRAVE_API_KEY": "${input:brave-key}" }
+    // },
+    // "tavily": {
+    //   "command": "npx",
+    //   "args": ["-y", "@tavily/mcp-server"]
+    // },
+    // "exa": {
+    //   "command": "npx",
+    //   "args": ["-y", "@exa-labs/exa-mcp-server"]
+    // },
+    // "firecrawl": {
+    //   "command": "npx",
+    //   "args": ["-y", "@firecrawl/mcp-server"]
+    // },
+
+    // ── OBSERVABILITY ───────────────────────────────────────────
+    // "sentry": {
+    //   "command": "npx",
+    //   "args": ["-y", "@modelcontextprotocol/server-sentry"],
+    //   "env": { "SENTRY_AUTH_TOKEN": "${input:sentry-token}" }
+    // },
+    // "datadog": {
+    //   "command": "npx",
+    //   "args": ["-y", "@datadog/mcp-server"],
+    //   "env": { "DD_API_KEY": "${input:datadog-key}" }
+    // },
+    // "axiom": {
+    //   "command": "npx",
+    //   "args": ["-y", "@axiomhq/mcp-server-axiom"]
+    // },
+    // "grafana": {
+    //   "command": "npx",
+    //   "args": ["-y", "@grafana/mcp-grafana"]
+    // },
+
+    // ── SECURITY ────────────────────────────────────────────────
+    // "snyk": {
+    //   "command": "npx",
+    //   "args": ["-y", "@snyk/mcp-server"],
+    //   "env": { "SNYK_TOKEN": "${input:snyk-token}" }
+    // },
+    // "gitguardian": {
+    //   "command": "npx",
+    //   "args": ["-y", "@gitguardian/gg-mcp"]
+    // },
+    // "semgrep": {
+    //   "command": "npx",
+    //   "args": ["-y", "@semgrep/mcp-server"]
+    // },
+    // "sonarqube": {
+    //   "command": "npx",
+    //   "args": ["-y", "@sonarsource/mcp-server"]
+    // },
+
+    // ── COMMUNICATION ───────────────────────────────────────────
+    // "slack": {
+    //   "command": "npx",
+    //   "args": ["-y", "@zencoderai/slack-mcp-server"],
+    //   "env": { "SLACK_BOT_TOKEN": "${input:slack-token}" }
+    // },
+    // "notion": {
+    //   "command": "npx",
+    //   "args": ["-y", "@notionhq/notion-mcp-server"],
+    //   "env": { "NOTION_API_KEY": "${input:notion-key}" }
+    // },
+
+    // ── PAYMENTS ────────────────────────────────────────────────
+    // "stripe": {
+    //   "command": "npx",
+    //   "args": ["-y", "@stripe/agent-toolkit"],
+    //   "env": { "STRIPE_SECRET_KEY": "${input:stripe-key}" }
+    // },
+    // "paypal": {
+    //   "type": "http",
+    //   "url": "https://mcp.paypal.com/mcp"
+    // },
+
+    // ── AI ──────────────────────────────────────────────────────
+    // "openai": {
+    //   "command": "npx",
+    //   "args": ["-y", "@openai/mcp-server"],
+    //   "env": { "OPENAI_API_KEY": "${input:openai-key}" }
+    // },
+    // "huggingface": {
+    //   "type": "http",
+    //   "url": "https://huggingface.co/mcp"
+    // },
+
+    // ── AUTH ────────────────────────────────────────────────────
+    // "auth0": {
+    //   "command": "npx",
+    //   "args": ["-y", "@auth0/mcp-server"],
+    //   "env": { "AUTH0_DOMAIN": "${input:auth0-domain}", "AUTH0_TOKEN": "${input:auth0-token}" }
+    // },
+
+    // ── CMS ─────────────────────────────────────────────────────
+    // "contentful": {
+    //   "command": "npx",
+    //   "args": ["-y", "@contentful/mcp-server"],
+    //   "env": { "CONTENTFUL_TOKEN": "${input:contentful-token}" }
+    // },
+
+    // ── FEATURE FLAGS ───────────────────────────────────────────
+    // "launchdarkly": {
+    //   "command": "npx",
+    //   "args": ["-y", "@launchdarkly/mcp-server"]
+    // },
+
+    // ── ANALYTICS ───────────────────────────────────────────────
+    // "posthog": {
+    //   "command": "npx",
+    //   "args": ["-y", "@posthog/mcp"],
+    //   "env": { "POSTHOG_API_KEY": "${input:posthog-key}" }
+    // },
+    // "mixpanel": {
+    //   "type": "http",
+    //   "url": "https://mcp.mixpanel.com"
+    // },
+    // "amplitude": {
+    //   "type": "http",
+    //   "url": "https://mcp.amplitude.com"
+    // },
+
+    // ── ENTERPRISE INTEGRATIONS ─────────────────────────────────
+    // "zapier": {
+    //   "type": "http",
+    //   "url": "https://actions.zapier.com/mcp"
+    // },
+    // "pipedream": {
+    //   "command": "npx",
+    //   "args": ["-y", "@pipedream/mcp"]
     // }
   }
 }
