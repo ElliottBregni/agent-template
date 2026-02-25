@@ -1,0 +1,58 @@
+# Files and directories AI agents should not process
+# Works with JetBrains AI Assistant
+
+# Dependencies
+node_modules/
+vendor/
+.venv/
+__pycache__/
+
+# Build output
+dist/
+build/
+.next/
+out/
+coverage/
+
+# Environment and secrets
+.env
+.env.*
+*.pem
+*.key
+*.cert
+
+# IDE and OS
+.idea/
+.vscode/settings.json
+.DS_Store
+Thumbs.db
+
+# Lock files (large, not useful for AI)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+Gemfile.lock
+composer.lock
+poetry.lock
+
+# Generated files
+*.min.js
+*.min.css
+*.map
+*.chunk.js
+
+# Binary and media
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.mp4
+*.mp3
+*.pdf
+*.zip
+*.tar.gz
