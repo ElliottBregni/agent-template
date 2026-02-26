@@ -1,20 +1,48 @@
 # Agent Configuration
-# Single entrypoint — references skills, MCP servers, and prompts.
-# Keeps orchestration declarative and version-controlled.
+# Single declarative entrypoint — model, agents, skills, hooks, MCP, prompts.
+# All paths relative to this file's directory (.github/agents/).
 
-model: claude-sonnet-4-5-20250929
+model: claude-opus-4-5
 
 instructions: ./instructions.md
 
+hooks: ../.github/hooks/hooks.json
+
+# ── SPECIALIST AGENTS ──────────────────────────────────────────────────────
+# Invoked with @agent-name in Copilot Chat or Copilot CLI
+agents:
+  - ./dev.agent.md          # General engineering — Claude Code behavior
+  - ./architect.agent.md    # System design, ADRs, technical review (read-only)
+  - ./security.agent.md     # Security audit, OWASP (read-only, no writes)
+  - ./oncall.agent.md       # Incident response, postmortems, runbooks
+  - ./product.agent.md      # Issue specs, user stories, backlog (read-only)
+  - ./devops.agent.md       # CI/CD, infra, observability
+
+# ── SKILLS ────────────────────────────────────────────────────────────────
+# Reusable capabilities loaded into context when relevant
 skills:
+  # Core engineering
   - ./skills/code-review.md
-  - ./skills/issue-triage.md
-  - ./skills/release-notes.md
   - ./skills/test-generation.md
   - ./skills/docs-update.md
+  # Product & planning
+  - ./skills/issue-triage.md
+  - ./skills/release-notes.md
+  - ./skills/sprint-planning.md
+  # Architecture & design
+  - ./skills/architecture-review.md
+  - ./skills/api-design.md
+  - ./skills/database-migrations.md
+  # Security & reliability
+  - ./skills/security-audit.md
+  - ./skills/dependency-audit.md
+  - ./skills/incident-response.md
+  - ./skills/performance-audit.md
 
+# ── MCP SERVERS ───────────────────────────────────────────────────────────
 mcp_servers: ./mcp/servers.json
 
+# ── OUTPUT TEMPLATES ──────────────────────────────────────────────────────
 prompts:
   - ./prompts/pr-description.md
   - ./prompts/commit-message.md

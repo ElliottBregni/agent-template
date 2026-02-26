@@ -1,0 +1,15 @@
+{
+  "name": "saas-team-template",
+  "description": "Staff-level SaaS engineering team agent config. Includes dev, architect, security, oncall, product, and devops agents with full skills, hooks, and MCP integration.",
+  "version": "2.0.0",
+  "author": {
+    "name": "ElliottBregni"
+  },
+  "license": "MIT",
+  "keywords": ["saas", "engineering", "security", "architecture", "devops", "oncall"],
+  "category": "engineering",
+  "agents": ".github/agents/",
+  "skills": ".github/agents/skills/",
+  "hooks": ".github/hooks/hooks.json",
+  "mcpServers": ".mcp.json"
+}

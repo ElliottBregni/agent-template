@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "hooks": {
+
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "bash -c 'mkdir -p ~/.copilot && INPUT=$(cat); SRC=$(echo \"$INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get(\\\"source\\\",\\\"\\\"))\" 2>/dev/null); echo \"{\\\"event\\\":\\\"sessionStart\\\",\\\"ts\\\":\\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\",\\\"source\\\":\\\"$SRC\\\",\\\"cwd\\\":\\\"$PWD\\\"}\" >> ~/.copilot/audit.log'",
+        "timeoutSec": 10,
+        "comment": "Log session start with source (new/resume/startup)"
+      }
+    ],
+
+    "sessionEnd": [
+      {
+        "type": "command",
+        "bash": "bash -c 'INPUT=$(cat); REASON=$(echo \"$INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get(\\\"reason\\\",\\\"\\\"))\" 2>/dev/null); echo \"{\\\"event\\\":\\\"sessionEnd\\\",\\\"ts\\\":\\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\",\\\"reason\\\":\\\"$REASON\\\"}\" >> ~/.copilot/audit.log'",
+        "timeoutSec": 10,
+        "comment": "Log session end with reason (complete/error/abort/timeout/user_exit)"
+      }
+    ],
+
+    "userPromptSubmitted": [
+      {
+        "type": "command",
+        "bash": "bash -c 'INPUT=$(cat); LEN=${#INPUT}; echo \"{\\\"event\\\":\\\"prompt\\\",\\\"ts\\\":\\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\",\\\"len\\\":$LEN}\" >> ~/.copilot/audit.log'",
+        "timeoutSec": 5,
+        "comment": "Log prompt submission (length only, not content)"
+      }
+    ],
+
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "bash -s << 'HOOK_EOF'\n#!/usr/bin/env bash\nset -euo pipefail\nINPUT=$(cat)\nTOOL=$(echo \"$INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get('toolName',''))\" 2>/dev/null || echo '')\nARGS=$(echo \"$INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get('toolArgs',''))\" 2>/dev/null || echo '')\n\n# ── BLOCK: force-push to main/master ────────────────────────────────────────\nif echo \"$ARGS\" | grep -qE 'git push.*(--force|-f).*(main|master)'; then\n  echo '{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Force-push to main/master is blocked. Push to a feature branch instead.\"}'\n  exit 0\nfi\n\n# ── BLOCK: hard reset ────────────────────────────────────────────────────────\nif echo \"$ARGS\" | grep -qE 'git reset --hard'; then\n  echo '{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"git reset --hard requires explicit user confirmation. Ask first.\"}'\n  exit 0\nfi\n\n# ── BLOCK: rm -rf on non-build dirs ─────────────────────────────────────────\nif echo \"$ARGS\" | grep -qE 'rm\\s+-[a-z]*r[a-z]*f|rm\\s+-[a-z]*f[a-z]*r'; then\n  if ! echo \"$ARGS\" | grep -qE 'rm.*\\s+(\\./)?(node_modules|dist|build|\\.next|coverage|tmp|\\.cache|out)\\b'; then\n    echo '{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"rm -rf on non-build directories requires user confirmation.\"}'\n    exit 0\n  fi\nfi\n\n# ── BLOCK: destructive DB operations ─────────────────────────────────────────\nif echo \"$ARGS\" | grep -qiE '(DROP\\s+TABLE|DROP\\s+DATABASE|TRUNCATE\\s+TABLE|DELETE\\s+FROM\\s+[a-z_]+\\s*;)'; then\n  echo '{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Destructive database operations require explicit user confirmation.\"}'\n  exit 0\nfi\n\n# ── BLOCK: skip git hooks ────────────────────────────────────────────────────\nif echo \"$ARGS\" | grep -qE 'git commit.*--no-verify|-n\\s'; then\n  echo '{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"--no-verify is blocked. Fix the failing hook instead.\"}'\n  exit 0\nfi\n\n# ── BLOCK: secret patterns in writes ────────────────────────────────────────\nif [ \"$TOOL\" = 'edit_file' ] || [ \"$TOOL\" = 'create_file' ]; then\n  if echo \"$ARGS\" | grep -qiE '(password|secret|token|api_key|private_key)\\s*=\\s*[\"'\\''\\`][^\"'\\''\\`]{8,}'; then\n    echo '{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Possible hardcoded secret detected. Use environment variables instead.\"}'\n    exit 0\n  fi\nfi\n\n# ── LOG: audit all tool calls ────────────────────────────────────────────────\necho \"{\\\"event\\\":\\\"tool\\\",\\\"ts\\\":\\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\",\\\"tool\\\":\\\"$TOOL\\\"}\" >> ~/.copilot/audit.log\n\nexit 0\nHOOK_EOF",
+        "timeoutSec": 30,
+        "comment": "Safety gate: blocks dangerous commands, hardcoded secrets, and destructive operations"
+      }
+    ],
+
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "bash -c 'INPUT=$(cat); TOOL=$(echo \"$INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get(\\\"toolName\\\",\\\"\\\"))\" 2>/dev/null); RESULT=$(echo \"$INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get(\\\"toolResult\\\",\\\"\\\"))\" 2>/dev/null); echo \"{\\\"event\\\":\\\"toolResult\\\",\\\"ts\\\":\\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\",\\\"tool\\\":\\\"$TOOL\\\",\\\"result\\\":\\\"$RESULT\\\"}\" >> ~/.copilot/audit.log'",
+        "timeoutSec": 10,
+        "comment": "Log tool results (success/failure/denied)"
+      }
+    ],
+
+    "errorOccurred": [
+      {
+        "type": "command",
+        "bash": "bash -c 'INPUT=$(cat); MSG=$(echo \"$INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); e=d.get(\\\"error\\\",{}); print(e.get(\\\"message\\\",\\\"\\\"))\" 2>/dev/null); echo \"{\\\"event\\\":\\\"error\\\",\\\"ts\\\":\\\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\\\",\\\"message\\\":\\\"$MSG\\\"}\" >> ~/.copilot/audit.log'",
+        "timeoutSec": 10,
+        "comment": "Log errors with message"
+      }
+    ]
+
+  }
+}
